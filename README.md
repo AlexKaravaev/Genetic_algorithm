@@ -1,1 +1,0 @@
-# Genetic_algorithm
