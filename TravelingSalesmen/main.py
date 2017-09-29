@@ -255,5 +255,7 @@ def main():
 	Russia.generate()
 	sol = Solver(population,Russia.getCities(),generations)
 	sol.solve()
-
-main()
+	
+	
+if __name__ == "__main__":
+	main()
