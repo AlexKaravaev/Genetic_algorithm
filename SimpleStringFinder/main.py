@@ -131,41 +131,42 @@ def display_population(population):
 		display(population[i])
 
 
-
-random.seed()
-population = generate_start_population(target)
-bestParent = population[0]
-bestFitness = get_fitness(population[0])
-i = 0
-new_population = []
-print("start_population")
-display_population(population)
-print("\t")
-success = 0
-
-for generation in range(0,generations):
-		
-	couples = mating_pool(population)
+def main():
+	random.seed()
+	population = generate_start_population(target)
+	bestParent = population[0]
+	bestFitness = get_fitness(population[0])
+	i = 0
+	new_population = []
+	print("start_population")
 	display_population(population)
-	new_population = generate_new_population(couples,population)
-	
-	if (len(target) <= best_fitness(new_population)):
-		print("I am in {1} generation state this is best_fitness {0}".format(best_fitness(new_population),generation))
+	print("\t")
+	success = 0
+
+	for generation in range(0,generations):
+
+		couples = mating_pool(population)
+		display_population(population)
+		new_population = generate_new_population(couples,population)
+
+		if (len(target) <= best_fitness(new_population)):
+			print("I am in {1} generation state this is best_fitness {0}".format(best_fitness(new_population),generation))
+			population = new_population
+			success = 1
+
+			print("------------SUCCESS!-----------")
+			break
+
+		for i in range(len(population))[::-1]:
+			del population[i]
 		population = new_population
-		success = 1
-
-		print("------------SUCCESS!-----------")
-		break
-	
-	for i in range(len(population))[::-1]:
-		del population[i]
-	population = new_population
-	bestFitness = best_fitness(new_population)
-	
-	
-if(success == 0):
-	print("---------FAILURE--------")
+		bestFitness = best_fitness(new_population)
 
 
+	if(success == 0):
+		print("---------FAILURE--------")
+
+if __name__ == "__main__":
+	main()
 
 
